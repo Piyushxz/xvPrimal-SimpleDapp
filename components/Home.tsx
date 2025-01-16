@@ -3,18 +3,21 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { motion } from "motion/react";
 import { Menu } from "./Menu";
+import { useEffect } from "react";
+import { BackgroundBeams } from "./ui/background-beams";
 
 export const Home = () => {
   const wallet = useWallet();
 
-  console.log(wallet.connected); // Logs wallet connection status
 
   return !wallet.connected ? (
-    <motion.div
+    <div>
+        <BackgroundBeams/>
+        <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4, ease: "easeInOut" }}
-      className="w-screen h-screen flex justify-center"
+      transition={{ delay: 0.3, ease: "easeInOut" }}
+      className="w-screen  flex justify-center"
     >
       <div className="w-[80vw] mt-24 flex justify-center">
         <div className="flex flex-col gap-2 text-center">
@@ -35,6 +38,8 @@ export const Home = () => {
         </div>
       </div>
     </motion.div>
+    </div>
+
   ) : (
     <Menu />
   );
