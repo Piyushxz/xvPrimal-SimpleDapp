@@ -10,7 +10,7 @@ export const Main = () =>{
     
                 <ConnectionProvider endpoint="https://api.devnet.solana.com">
 
-        <WalletProvider wallets={[]} autoConnect>
+        <WalletProvider wallets={[]} >
         <WalletModalProvider>
             <Home/>
         </WalletModalProvider>

@@ -3,13 +3,19 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { motion } from "motion/react";
 import { Menu } from "./Menu";
-import { useEffect } from "react";
 import { BackgroundBeams } from "./ui/background-beams";
-
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userPublicKey } from "@/atoms";
 export const Home = () => {
   const wallet = useWallet();
+  const [pubKey,setPubKey] = useRecoilState(userPublicKey)
+  if(wallet.connected){
+    if(wallet.publicKey)
+    setPubKey(wallet.publicKey?.toBase58())
+  console.log(pubKey)
 
-
+  }
+  console.log(wallet.publicKey?.toBase58())
   return !wallet.connected ? (
     <div>
         <BackgroundBeams/>
@@ -41,6 +47,6 @@ export const Home = () => {
     </div>
 
   ) : (
-    <Menu />
+   <Menu/>
   );
 };
